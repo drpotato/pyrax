@@ -72,7 +72,7 @@ class BaseResource(object):
                 key = key.encode(pyrax.get_encoding())
             elif isinstance(key, bytes):
                 key = key.decode("utf-8")
-            setattr(self, key, val)
+            setattr(self, key.decode(), val)
 
 
     def __getattr__(self, key):
