@@ -250,7 +250,7 @@ class CloudBlockStorageManager(BaseManager):
         """
         Used to create the dict required to create a new volume
         """
-        if not isinstance(size, (int, long)) or not (
+        if not isinstance(size, int) or not (
                 MIN_SIZE <= size <= MAX_SIZE):
             raise exc.InvalidSize("Volume sizes must be integers between "
                     "%s and %s." % (MIN_SIZE, MAX_SIZE))

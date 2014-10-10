@@ -826,7 +826,7 @@ class CloudLoadBalancerManager(BaseManager):
         self.delete_metadata(loadbalancer, node=node)
         # Convert the metadata dict into the list format
         metadata_list = [{"key": key, "value": val}
-                for key, val in metadata.items()]
+                for key, val in list(metadata.items())]
         if node:
             uri = "/loadbalancers/%s/nodes/%s/metadata" % (
                     utils.get_id(loadbalancer), utils.get_id(node))
@@ -848,7 +848,7 @@ class CloudLoadBalancerManager(BaseManager):
         id_lookup = dict([(itm["key"], itm["id"]) for itm in md])
         metadata_list = []
         # Updates must be done individually
-        for key, val in metadata.items():
+        for key, val in list(metadata.items()):
             try:
                 meta_id = id_lookup[key]
                 if node:
@@ -1146,7 +1146,7 @@ class Node(object):
 
     def _diff(self):
         diff_dict = {}
-        for att, val in self._original_state.items():
+        for att, val in list(self._original_state.items()):
             curr = getattr(self, att)
             if curr != val:
                 diff_dict[att] = curr

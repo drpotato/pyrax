@@ -29,7 +29,7 @@ The source code for <b>pyrax</b> can be found at:
 http://github.com/rackspace/pyrax
 """
 
-from __future__ import absolute_import
+
 from functools import wraps
 import inspect
 import logging

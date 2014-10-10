@@ -267,7 +267,7 @@ class CloudDNSPTRRecord(object):
         self.type = self.id = self.data = self.name = None
         self.ttl = self.comment = None
         if data:
-            for key, val in data.items():
+            for key, val in list(data.items()):
                 setattr(self, key, val)
         self.device = device
 
@@ -344,7 +344,7 @@ class CloudDNSManager(BaseManager):
         Resets the internal attributes when there is no current paging request.
         """
         if service == "all":
-            for svc in self._paging.keys():
+            for svc in list(self._paging.keys()):
                 svc_dct = self._paging[svc]
                 svc_dct["next_uri"] = svc_dct["prev_uri"] = None
                 svc_dct["total_entries"] = None
@@ -689,7 +689,7 @@ class CloudDNSManager(BaseManager):
                 "ttl": ttl,
                 "emailAddress": emailAddress,
                 }
-        none_keys = [key for key, val in body.items()
+        none_keys = [key for key, val in list(body.items())
                 if val is None]
         for none_key in none_keys:
             body.pop(none_key)
@@ -1434,7 +1434,7 @@ class ResultsIterator(object):
         return self
 
 
-    def next(self):
+    def __next__(self):
         """
         Return the next available item. If there are no more items in the
         local 'results' list, check if there is a 'next_uri' value. If so,

@@ -93,7 +93,7 @@ class BaseResource(object):
 
 
     def __repr__(self):
-        reprkeys = sorted(key for key in self.__dict__.keys()
+        reprkeys = sorted(key for key in list(self.__dict__.keys())
                 if (key[0] != "_")
                 and (key not in ("manager", "created", "updated"))
                 and (key not in self._non_display))

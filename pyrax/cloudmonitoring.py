@@ -646,7 +646,7 @@ class CloudMonitorCheckManager(_PaginationManager):
         the Python side.
         """
         found = []
-        searches = kwargs.items()
+        searches = list(kwargs.items())
         for obj in self.list():
             try:
                 if all(getattr(obj, attr) == value

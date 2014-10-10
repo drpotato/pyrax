@@ -46,7 +46,7 @@ class CloudDatabaseVolume(object):
 
     def __init__(self, instance, info):
         self.instance = instance
-        for key, val in info.items():
+        for key, val in list(info.items()):
             setattr(self, key, val)
 
 

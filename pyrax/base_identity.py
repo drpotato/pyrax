@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import absolute_import
+
 
 import six.moves.configparser as ConfigParser
 import datetime
@@ -489,7 +489,7 @@ class BaseIdentity(object):
             raise exc.AuthenticationFailed("Incorrect/unauthorized "
                     "credentials received")
         elif resp.status_code > 299:
-            msg = resp_body[resp_body.keys()[0]]["message"]
+            msg = resp_body[list(resp_body.keys())[0]]["message"]
             raise exc.AuthenticationFailed("%s - %s." % (resp.reason, msg))
         return resp, resp_body
 

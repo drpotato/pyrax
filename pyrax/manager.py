@@ -283,7 +283,7 @@ class BaseManager(object):
         the Python side.
         """
         found = []
-        searches = kwargs.items()
+        searches = list(kwargs.items())
 
         for obj in self.list():
             try:

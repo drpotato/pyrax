@@ -401,7 +401,7 @@ class ScalingGroupManager(BaseManager):
         ret["type"] = data.get("type")
         args = data.get("args", {})
         ret["load_balancers"] = args.get("loadBalancers")
-        for key, value in args.get("server", {}).items():
+        for key, value in list(args.get("server", {}).items()):
             norm_key = key_map.get(key, key)
             ret[norm_key] = value
         return ret

@@ -18,8 +18,8 @@
 #    under the License.
 
 
-from __future__ import print_function
-from __future__ import absolute_import
+
+
 import datetime
 from functools import wraps
 import hashlib
@@ -58,7 +58,7 @@ EARLY_DATE_STR = "1900-01-01T00:00:00"
 
 # Used to indicate values that are lazy-loaded
 class Fault_cls(object):
-    def __nonzero__(self):
+    def __bool__(self):
         return False
 
 FAULT = Fault_cls()
@@ -217,7 +217,7 @@ class Container(BaseResource):
             return
         else:
             self._cdn_enabled = True
-        for key, value in headers.items():
+        for key, value in list(headers.items()):
             low_key = key.lower()
             if low_key == "x-cdn-uri":
                 self._cdn_uri = value
@@ -2826,7 +2826,7 @@ class StorageClient(BaseClient):
                     if self.count > self.interval:
                         self.count = 0
                         print(".")
-                ret = self.gen.next()
+                ret = next(self.gen)
                 self.processed += len(ret)
                 return ret
 

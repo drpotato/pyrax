@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
+
 
 import datetime
 import email.utils
@@ -187,7 +187,7 @@ class ResultsIterator(object):
         return self
 
 
-    def next(self):
+    def __next__(self):
         """
         Return the next available item. If there are no more items in the
         local 'results' list, check if there is a 'next_uri' value. If so,
@@ -279,8 +279,8 @@ def random_unicode(length=20):
     up to code point 1000.
     """
     def get_char():
-        return six.unichr(random.randint(32, 1000))
-    chars = u"".join([get_char() for ii in six.moves.range(length)])
+        return six.chr(random.randint(32, 1000))
+    chars = "".join([get_char() for ii in six.moves.range(length)])
     return _join_chars(chars, length)
 
 
@@ -339,7 +339,7 @@ def folder_size(pth, ignore=None):
 def add_method(obj, func, name=None):
     """Adds an instance method to an object."""
     if name is None:
-        name = func.func_name
+        name = func.__name__
     method = types.MethodType(func, obj, obj.__class__)
     setattr(obj, name, method)
 
@@ -594,7 +594,7 @@ def params_to_dict(params, dct):
     Updates the 'dct' dictionary with the 'params' dictionary, filtering out
     all those whose param value is None.
     """
-    for param, val in params.items():
+    for param, val in list(params.items()):
         if val is None:
             continue
         dct[param] = val
@@ -656,7 +656,7 @@ def case_insensitive_update(dct1, dct2):
     No return value; this function modified dct1 similar to the update() method.
     """
     lowkeys = dict([(key.lower(), key) for key in dct1])
-    for key, val in dct2.items():
+    for key, val in list(dct2.items()):
         d1_key = lowkeys.get(key.lower(), key)
         dct1[d1_key] = val
 

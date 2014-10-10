@@ -306,7 +306,7 @@ class ImageManager(BaseManager):
         img = self.get(img)
         uri = "/%s/%s" % (self.uri_base, utils.get_id(img))
         body = []
-        for key, val in value_dict.items():
+        for key, val in list(value_dict.items()):
             op = "replace" if key in img.__dict__ else "add"
             body.append({"op": op,
                     "path": "/%s" % key,
